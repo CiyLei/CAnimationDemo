@@ -23,7 +23,7 @@ compile 'com.ciy:canimation:1.0.0'
 
 ![Image text](https://github.com/CiyLei/CAnimationDemo/blob/master/gif/20180503211037.gif)
 
-(这里只是gif播放完了又重新播放了,texView依旧还是会保持那么大,那么红的)
+### (这里只是gif播放完了又重新播放了,texView依旧还是会保持那么大,那么红的)
 
 ![Image text](https://github.com/CiyLei/CAnimationDemo/blob/master/gif/20180503211119.gif)
 
