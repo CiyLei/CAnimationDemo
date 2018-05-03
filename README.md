@@ -220,11 +220,11 @@ public class CTextSizeViewAttr extends CViewAttr<Float> {
 
 如果需要添加属性的扩展,那么需要继承`CViewAttr`这个类,指定一个属性返回类型的泛型.然后需要实现实现以下几个方法.
 
-`getAttrValue(View)` 这个方法用来返回需要监测的属性的值 (必须重新)
+`getAttrValue(View)` 这个方法用来返回需要监测的属性的值 (必须重写)
 
-`setAttrValue(View,Value)` 如何设置属性值 (必须重新)
+`setAttrValue(View,Value)` 如何设置属性值 (必须重写)
 
-`isFilter(View)` 是否过滤,因为一个属性并不是全部的view都有的,所以这里返回True表示过滤 (不一定要重新,默认返回False)
+`isFilter(View)` 是否过滤,因为一个属性并不是全部的view都有的,所以这里返回True表示过滤 (不一定要重写,默认返回False)
 
 `attrProgress(progress,View)` 这里是动画更新进度会触发的方法,第一个参数`progress`表示进度,从0-100.如果属性的值是一个直线函数的变化,那么框架默认实现了,那如果你属性的值根据进度会进行不按套路的变化的话,请重写这个方法,具体可以看`CBackgroupColorViewAttr`这个类是怎么进行颜色的变化支持的
 
