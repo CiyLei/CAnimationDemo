@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.canimation.CAnimationHelp;
 import com.example.canimation.COnExecutionFinshListener;
+import com.example.canimation.attr.CTextColorViewAttr;
 import com.example.canimation.attr.CTextSizeViewAttr;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onExecution() {
                         ViewGroup.LayoutParams lp = mTextView1.getLayoutParams();
-                        lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                        lp.width = 600;
                         lp.height = 300;
                         mTextView1.setLayoutParams(lp);
                         mTextView1.setBackgroundColor(Color.RED);
-                        mTextView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                        mTextView1.setTextColor(Color.GREEN);
                     }
                 });
             }
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                         lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                         mTextView1.setLayoutParams(lp);
                         mTextView1.setBackgroundColor(Color.YELLOW);
-                        mTextView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                        mTextView1.setTextColor(Color.RED);
                     }
                 }, new BounceInterpolator());
             }
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //卸载字体大小支持
-                CAnimationHelp.mViewAttrClass.remove(CTextSizeViewAttr.class);
+                CAnimationHelp.mViewAttrClass.remove(CTextColorViewAttr.class);
             }
         });
 
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //加载字体大小支持
-                CAnimationHelp.mViewAttrClass.add(CTextSizeViewAttr.class);
+                CAnimationHelp.mViewAttrClass.add(CTextColorViewAttr.class);
             }
         });
     }

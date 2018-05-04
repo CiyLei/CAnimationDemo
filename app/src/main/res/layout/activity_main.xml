@@ -12,30 +12,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:text="Test"/>
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="变大变红"/>
+        android:text="开始"/>
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="缩小变黄"/>
+        android:text="还原"/>
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="卸载字体大小支持"/>
+        android:text="卸载字体颜色支持"/>
 
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="加载字体大小支持"/>
+        android:text="加载字体颜色支持"/>
 
 </LinearLayout>
