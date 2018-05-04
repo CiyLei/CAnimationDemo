@@ -171,7 +171,7 @@ mButton2.setOnClickListener(new View.OnClickListener() {
 mButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //卸载字体大小支持
+                //卸载字体颜色支持
                 CAnimationHelp.mViewAttrClass.remove(CTextColorViewAttr.class);
             }
         });
@@ -179,7 +179,7 @@ mButton3.setOnClickListener(new View.OnClickListener() {
         mButton4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //加载字体大小支持
+                //加载字体颜色支持
                 CAnimationHelp.mViewAttrClass.add(CTextColorViewAttr.class);
             }
         });
