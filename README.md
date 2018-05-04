@@ -101,7 +101,7 @@ mButton1.setOnClickListener(new View.OnClickListener() {
 
 第一个参数 代表持续的时间
 
-第二个参数 传递了一个匿名类,实现了一个`onExecution`方法,在里面设置了textView的宽占满父布局,高300px,背景色变红,字体大小设为50sp
+第二个参数 传递了一个匿名类,实现了一个`onExecution`方法,在里面设置了textView的高宽,背景色变红,字体颜色变绿
 
 中间的过渡动画全部由框架实现,是不是很奇妙
 
@@ -120,7 +120,7 @@ mButton2.setOnClickListener(new View.OnClickListener() {
                         lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                         mTextView1.setLayoutParams(lp);
                         mTextView1.setBackgroundColor(Color.YELLOW);
-                        mTextView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                        mTextView1.setTextColor(Color.RED);
                     }
                 }, new BounceInterpolator());
             }
@@ -162,11 +162,9 @@ mButton2.setOnClickListener(new View.OnClickListener() {
 
 先看看效果
 
-![Image text](https://github.com/CiyLei/CAnimationDemo/blob/master/gif/20180503211127.gif)
+![Image text](https://github.com/CiyLei/CAnimationDemo/blob/master/gif/device-2018-05-04-210855.gif)
 
-![Image text](https://github.com/CiyLei/CAnimationDemo/blob/master/gif/20180503211145.gif)
-
-先看看button3,button4是如何卸载和加载字体大小的支持的
+先看看button3,button4是如何卸载和加载字体颜色的支持的
 
 ```
 
@@ -174,7 +172,7 @@ mButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //卸载字体大小支持
-                CAnimationHelp.mViewAttrClass.remove(CTextSizeViewAttr.class);
+                CAnimationHelp.mViewAttrClass.remove(CTextColorViewAttr.class);
             }
         });
 
@@ -182,7 +180,7 @@ mButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //加载字体大小支持
-                CAnimationHelp.mViewAttrClass.add(CTextSizeViewAttr.class);
+                CAnimationHelp.mViewAttrClass.add(CTextColorViewAttr.class);
             }
         });
         
@@ -190,29 +188,38 @@ mButton3.setOnClickListener(new View.OnClickListener() {
 
 非常简单,就是普通的列表函数,这样,如果有你不喜欢的扩展支持也可以删除,那如果我有很多自定义的view,都是自定义的属性,该怎么办,所以我们尝试如何添加扩展吧
 
-就假设添加一个支持字体大小的扩展吧,我们已经有了,所以直接看把.
+就假设添加一个支持字体颜色的扩展吧,我们已经有了,所以直接看把.
 
-### CTextSizeViewAttr
+### CTextColorViewAttr
 
 ```
 
-public class CTextSizeViewAttr extends CViewAttr<Float> {
+public class CTextColorViewAttr extends CViewAttr<Integer> {
 
     @Override
-    public Float getAttrValue(View view) {
+    public Integer getAttrValue(View view) {
         TextView tv = (TextView) view;
-        return tv.getTextSize();
+        return tv.getCurrentTextColor();
     }
 
     @Override
-    public void setAttrValue(View view, Float value) {
+    public void attrProgress(int progress, View view) {
         TextView tv = (TextView) view;
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, value);
+        //计算原来和现在属性的差距
+        int currentAttrValue = getCurrentAttrValue();
+        int previousAttrValue = getPreviousAttrValue();
+        tv.setTextColor(CViewAttrUtil.transitionColor(progress / 100.00f, previousAttrValue, currentAttrValue));
     }
 
     @Override
-    public boolean isFilter(View view) {
-        return !(view instanceof TextView);
+    public void setAttrValue(View view, Integer value) {
+        TextView tv = (TextView) view;
+        tv.setTextColor(value);
+    }
+
+    @Override
+    public boolean isMatching(View view) {
+        return view instanceof TextView;
     }
 }
 
@@ -224,42 +231,12 @@ public class CTextSizeViewAttr extends CViewAttr<Float> {
 
 `setAttrValue(View,Value)` 如何设置属性值 (必须重写)
 
-`isFilter(View)` 是否过滤,因为一个属性并不是全部的view都有的,所以这里返回True表示过滤 (不一定要重写,默认返回False)
+`isMatching(View)` 是否匹配属性,因为一些属性并不是全部的view都有的,所以这里进行匹配 (不一定要重写)
 
-`attrProgress(progress,View)` 这里是动画更新进度会触发的方法,第一个参数`progress`表示进度,从0-100.如果属性的值是一个直线函数的变化,那么框架默认实现了,那如果你属性的值根据进度会进行不按套路的变化的话,请重写这个方法,具体可以看`CBackgroupColorViewAttr`这个类是怎么进行颜色的变化支持的
-
-### CBackgroupColorViewAttr
-
-```
-
-public class CBackgroupColorViewAttr extends CViewAttr<Integer> {
-
-    @Override
-    public Integer getAttrValue(View view) {
-        if (view.getBackground() instanceof ColorDrawable) {
-            ColorDrawable cd = (ColorDrawable) view.getBackground();
-            return cd.getColor();
-        }
-        return Color.TRANSPARENT;
-    }
-
-    @Override
-    public void attrProgress(int progress, View view) {
-        //计算原来和现在属性的差距
-        int currentAttrValue = getCurrentAttrValue();
-        int previousAttrValue = getPreviousAttrValue();
-        view.setBackgroundColor(CViewAttrUtil.transitionColor(progress / 100.00f, previousAttrValue, currentAttrValue));
-    }
-
-    @Override
-    public void setAttrValue(View view, Integer value) {
-        view.setBackgroundColor(value);
-    }
-
-}
-
-```
+`attrProgress(progress,View)` 这里是动画更新进度会触发的方法,第一个参数`progress`表示进度,从0-100.如果属性的值是一个直线函数的变化,那么框架默认实现了,那如果你属性的值根据进度会进行不按套路的变化的话,请重写这个方法,具体可以看`CBackgroupColorViewAttr`这个类是怎么进行颜色的变化支持
 
 在`attrProgress`函数中,`getCurrentAttrValue()`方法是返回要成为的属性值,`getPreviousAttrValue()`方法是返回原本的属性值
 
 如果要从红色变为黄色,那么`getCurrentAttrValue()`返回的是黄色的argb值,`getPreviousAttrValue()`返回的是红色的argb值
+
+这里用了`CViewAttrUtil.transitionColor`工具类来计算过渡的颜色
