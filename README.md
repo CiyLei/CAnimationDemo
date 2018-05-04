@@ -235,10 +235,10 @@ public class CTextColorViewAttr extends CViewAttr<Integer> {
 
 `attrProgress(progress,View)` 这里是动画更新进度会触发的方法,第一个参数`progress`表示进度,从0-100.如果属性的值是一个直线函数的变化,那么框架默认实现了,那如果你属性的值根据进度会进行不按套路的变化的话,请重写这个方法
 
+---
 
+在`attrProgress`函数中,`getCurrentAttrValue()`方法是返回要成为的属性值,`getPreviousAttrValue()`方法是返回原本的属性值
 
-> 在`attrProgress`函数中,`getCurrentAttrValue()`方法是返回要成为的属性值,`getPreviousAttrValue()`方法是返回原本的属性值
+如果要从红色变为黄色,那么`getCurrentAttrValue()`返回的是黄色的argb值,`getPreviousAttrValue()`返回的是红色的argb值
 
-> 如果要从红色变为黄色,那么`getCurrentAttrValue()`返回的是黄色的argb值,`getPreviousAttrValue()`返回的是红色的argb值
-
-> 这里用了`CViewAttrUtil.transitionColor`工具类来计算过渡的颜色
+这里用了`CViewAttrUtil.transitionColor`工具类来计算过渡的颜色
