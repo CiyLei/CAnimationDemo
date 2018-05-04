@@ -132,7 +132,7 @@ mButton2.setOnClickListener(new View.OnClickListener() {
 
 ## 原理
 
-其实原理很Low,就是监测页面上的哪些view改变了哪些属性,然后框架在逐步的完成,所以只支持一下属性
+其实原理很Low,就是监测页面上的哪些view改变了哪些属性,然后框架在逐步的完成,所以只支持以下属性
 
 * `Alpha` 透明度
 
