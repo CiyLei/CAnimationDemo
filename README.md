@@ -97,7 +97,7 @@ mButton1.setOnClickListener(new View.OnClickListener() {
         
 ```
 
-在button1的单击事件里面,我们调用了`CAnimationHel`对象的一个`startWithDuration`方法,传递了3个参数
+在button1的单击事件里面,我们调用了`CAnimationHel`对象的一个`startWithDuration`方法,传递了2个参数
 
 第一个参数 代表持续的时间
 
