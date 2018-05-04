@@ -8,24 +8,20 @@
 
 ### Gradle
 ```
-compile 'com.ciy:canimation:1.0.0'
+compile 'com.ciy:CAnimation:1.0.1'
 ```
 ```
 <dependency>
   <groupId>com.ciy</groupId>
-  <artifactId>canimation</artifactId>
-  <version>1.0.0</version>
+  <artifactId>CAnimation</artifactId>
+  <version>1.0.1</version>
   <type>pom</type>
 </dependency>
 ```
 
 ### 看效果图
 
-![Image text](https://github.com/CiyLei/CAnimationDemo/blob/master/gif/20180503211037.gif)
-
-### `上图只是gif播放完了又重新播放了,texView依旧还是会保持那么大,那么红的,之后的图片也一样执行完动画之后会保持的`
-
-![Image text](https://github.com/CiyLei/CAnimationDemo/blob/master/gif/20180503211119.gif)
+![Image text](https://github.com/CiyLei/CAnimationDemo/blob/master/gif/device-2018-05-04-210747.gif)
 
 ### 就是普通的动画嘛,我们再看代码
 
@@ -44,31 +40,33 @@ compile 'com.ciy:canimation:1.0.0'
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:text="Test"/>
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="变大变红"/>
+        android:text="开始"/>
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="缩小变黄"/>
+        android:text="还原"/>
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="卸载字体大小支持"/>
+        android:text="卸载字体颜色支持"/>
 
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="加载字体大小支持"/>
+        android:text="加载字体颜色支持"/>
 
 </LinearLayout>
 
@@ -87,11 +85,11 @@ mButton1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onExecution() {
                         ViewGroup.LayoutParams lp = mTextView1.getLayoutParams();
-                        lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                        lp.width = 600;
                         lp.height = 300;
                         mTextView1.setLayoutParams(lp);
                         mTextView1.setBackgroundColor(Color.RED);
-                        mTextView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+                        mTextView1.setTextColor(Color.GREEN);
                     }
                 });
             }
