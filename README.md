@@ -7,10 +7,10 @@
 如果开发过ios,一定`UIView.animateWithDuration`这个函数不陌生,这是对它的简单实现
 
 ### Gradle
-```
+``` groovy
 compile 'com.ciy:CAnimation:1.0.1'
 ```
-```
+``` xml
 <dependency>
   <groupId>com.ciy</groupId>
   <artifactId>CAnimation</artifactId>
@@ -25,7 +25,7 @@ compile 'com.ciy:CAnimation:1.0.1'
 
 ### 就是普通的动画嘛,我们再看代码
 
-```
+``` xml
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -74,7 +74,7 @@ compile 'com.ciy:CAnimation:1.0.1'
 
 ### MainActivity
 
-```
+``` java
 
 CAnimationHelp cah = new CAnimationHelp(this);
 
@@ -107,7 +107,7 @@ mButton1.setOnClickListener(new View.OnClickListener() {
 
 那自然就知道button2里面写了什么代码
 
-```
+``` java
 
 mButton2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,7 +166,7 @@ mButton2.setOnClickListener(new View.OnClickListener() {
 
 先看看button3,button4是如何卸载和加载字体颜色的支持的
 
-```
+``` java
 
 mButton3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,7 +192,7 @@ mButton3.setOnClickListener(new View.OnClickListener() {
 
 ### CTextColorViewAttr
 
-```
+``` java
 
 public class CTextColorViewAttr extends CViewAttr<Integer> {
 
